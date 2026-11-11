@@ -1,0 +1,7 @@
+product_id,brand,price,note,source,status
+SHOWER,Jolie,$165 / recharge $33-38,"Leader DTC, Ulta, 2 class actions 2026","WebSearch (résumé de résultats, page non ouverte)",FACT
+SHOWER,AquaBliss SF100,~$30-35 (à vérifier),Entrée de gamme Amazon,"WebSearch (résumé de résultats, page non ouverte)",ESTIMATE
+SHOWER,Stone Stream EcoLux,$34.99 / cartouche $19.95,"15-stage, positionnement eau dure","WebSearch (résumé de résultats, page non ouverte)",FACT
+SHOWER,"Afina, Canopy, Hello Klean, Act+Acre, Eskiin, Weddell, Aquasana, Sprite",UNAVAILABLE,Présents dans l'autocomplétion/SERP; prix non obtenus,"WebSearch (résumé de résultats, page non ouverte)",UNAVAILABLE
+PILLOW,"Osteo, Cozyplayer, UTTU, EPABO, Derila, Cushion Lab, Groove",UNAVAILABLE,Commodité Amazon + DTC; prix non obtenus,"WebSearch (résumé de résultats, page non ouverte)",UNAVAILABLE
+DOGPULL,Dog Friendly Co. $36-39; Spark Paws $39.99; PetSafe $20-25,voir note,Google Shopping page 1,"Google Keyword Planner via AdWhispr MCP (US, geo 2840)",FACT

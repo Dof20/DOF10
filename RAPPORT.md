@@ -1,4 +1,45 @@
-# LYRA V2.1 — Rapport de phase 1 (11 novembre 2026)
+# LYRA V2.1 — Rapport de recherche (mis à jour le 11 novembre 2026, phase 2)
+
+**Verdict phase 2 : la demande est validée, l'offre ne l'est pas.** Le filtre de douche se vend massivement, y compris entre $40 et $90, et les cartouches se rachètent. Mais je n'ai trouvé aucun fournisseur qui permette de le vendre en dropshipping sans stock, sous marque propre, avec un produit certifié. Dans les contraintes fixées, je ne recommande pas de lancer ce produit tel quel.
+
+## Phase 2 — ce que la lecture directe des sources a montré
+
+**La demande est confirmée sur Amazon (FACT)**
+
+| Produit | Prix | Avis | Achats/mois affichés |
+|---|---:|---:|---:|
+| AquaBliss SF100 (n°1 des filtres de douche) | $36.99 | 70 351 (4,4/5) | 10 000+ |
+| Cartouche AquaBliss SFC100 | $17.99 | 20 800 | 10 000+ |
+| Cartouches AquaBliss, pack de 3 | $42.99 | 20 800 | 8 000+ |
+| Weddell Duo (certifié NSF) | $89.98 | 1 200 | 2 000+ |
+| MyHalos | $74.99 | 1 500 | 2 000+ |
+| AquaHomeGroup | $49.95 | 5 600 | 1 000+ |
+
+Sur la première page de « shower filter for hard water », le prix médian est de $26.98 et 11 produits sur 48 sont entre $40 et $90. Les achats mensuels affichés cumulent au moins 94 000 unités.
+
+**L'offre bute sur le fournisseur (FACT)**
+
+- **Crystal Quest**, seul fabricant américain avec un programme dropship public : gratuit et sans minimum, mais fermé aux vendeurs internationaux, vendu sous leur marque et non la vôtre, à des prix publics déjà alignés ($40.95 le filtre, $29.50 la cartouche). La remise revendeur n'est pas publiée.
+- **Génériques AliExpress expédiés des États-Unis** : $11 à $25 le filtre. Aucun ne mentionne la certification NSF/ANSI 177 et les annonces portent les allégations (« softens », « eczema ») qui valent des procès à Jolie. Ce sont les mêmes produits qu'Amazon livre en Prime à $18–37.
+- **CJ Dropshipping, Alibaba, Spocket, Syncee** : protégés par contrôle anti-robot ou connexion ; non consultés.
+
+Vendre un générique non certifié à $59 face à un n°1 à $36.99 doté de 70 000 avis n'offre aucun avantage au client. Le positionnement honnête envisagé en phase 1 exige un produit certifié, donc un fabricant, donc du stock ou une entité américaine.
+
+**Toujours inaccessible** : texte des avis négatifs Amazon (connexion requise), Reddit et Meta Ads Library (refusent les robots), Google Trends (limite de requêtes), détail TikTok Creative Center (connexion). Perplexity répond désormais mais sa clé API est invalide.
+
+## Trois voies possibles
+
+| Voie | Ce que ça change | Limite |
+|---|---|---|
+| A. Revendre Crystal Quest ou Sprite via une entité américaine | Produit certifié, sans stock | Pas de marque propre, marge inconnue, entité US requise |
+| B. Marque propre avec petit stock chez un fabricant certifié, logé chez un logisticien US | Vraie mini-marque, allégations défendables | Sort du « sans stock » ; budget de 1 500 € probablement insuffisant (à chiffrer par devis) |
+| C. Abandonner ce produit et instruire un autre besoin | Respecte toutes les contraintes | Repart de la demande ; quota mots-clés limité jusqu'au 1er décembre |
+
+Ma recommandation : la voie C, en gardant le filtre de douche comme référence. Les contraintes « sans stock » et « 500–1 500 € » sont incompatibles avec une marque défendable sur ce produit. La voie B devient la bonne si vous acceptez un petit stock : la demande est la mieux documentée de tout ce que j'ai examiné.
+
+---
+
+# Rapport de phase 1 (pour mémoire)
 
 **Verdict : aucune opportunité n'est validée à ce stade.** Un candidat principal se dégage — une mini-marque « routine eau dure » autour d'un filtre de douche avec cartouches récurrentes — mais trois preuves manquent pour le retenir : le coût fournisseur réel, un fournisseur dropship US confirmé et le paysage publicitaire. Le protocole interdit de forcer la sélection ; je ne la force pas.
 

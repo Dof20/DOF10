@@ -1,5 +1,5 @@
 id,name,price_band,verdict
-SHOWER,Routine eau dure : filtre de douche + cartouches,$40-90 (héros) + recharge récurrente,CANDIDAT PRINCIPAL - NON VALIDÉ
+SHOWER,Routine eau dure : filtre de douche + cartouches,$40-90 (héros) + recharge récurrente,DEMANDE VALIDÉE - OFFRE NON VALIDÉE (blocage fournisseur)
 PILLOW,Oreiller cervical ergonomique,$40-90,ALTERNATIVE - faible
 REDLIGHT,Luminothérapie rouge à domicile,>$90 typique,"ÉCARTÉ (prix, FDA)"
 POSTURE,Correcteur de posture,<$40,"ÉCARTÉ (prix, commodité)"

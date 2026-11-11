@@ -4,9 +4,9 @@ SHOWER,Tendance,0.1,4,Spate +33% a/a
 SHOWER,Adéquation prix $40-90,0.1,4,Héros $49-79 crédible entre $35 et $165
 SHOWER,Récurrence / LTV,0.15,5,Cartouche tous les 90 j
 SHOWER,Coût d'acquisition abordable,0.15,2,"CPC $4.67, difficulté payante 100"
-SHOWER,Différenciation possible,0.1,3,Angles dortoir/puits/extensions; promesse 'eau dure' fragile
+SHOWER,Différenciation possible,0.1,2,AquaBliss n°1 à $36.99 avec 70 351 avis; un générique à $59 sans stock n a pas d avantage
 SHOWER,Risque réglementaire (5=faible),0.1,2,"Class actions Jolie, NSF, Title 20, allégations santé"
-SHOWER,Faisabilité dropship US,0.1,2,"Pistes US non confirmées, coûts inconnus"
+SHOWER,Faisabilité dropship US,0.1,1,Seul fournisseur US certifié trouvé exclut les vendeurs internationaux et la marque propre; génériques non certifiés
 PILLOW,Demande documentée,0.2,5,33-40 000/mois
 PILLOW,Tendance,0.1,3,"Stable, pas de signal de hausse"
 PILLOW,Adéquation prix $40-90,0.1,5,$40-90 naturel

@@ -99,6 +99,24 @@ c.executemany("INSERT INTO tools VALUES(?,?,?)", [
 ("Ubersuggest","LIMITÉ","3 rapports/jour; 2 overview + autocomplétion utilisés"),("Semrush","BLOQUÉ","0 unité API"),("Perplexity","ÉCHEC","fetch failed (hôte non autorisé probable)"),
 ("Ahrefs, Similarweb, Klaviyo, AdsAgent, AdCopilot...","ÉCHEC","403 proxy à la connexion"),("HTTP direct / Playwright / web-fetch","BLOQUÉ","Politique réseau: Amazon, Reddit, Google Trends, TikTok, Meta Ads Library, fournisseurs inaccessibles"),
 ("Shopify","OK partiel","Boutique France/EUR/Basic; Collective indisponible"),("Python 3.13, pandas, sqlite3, openpyxl, Node 22","OK","matplotlib absent"),("Gmail, Drive, Sheets, Calendar, Gamma, Linear, ElevenLabs","OK","Non utilisés (hors périmètre recherche)")])
+
+# ---- Phase 2 (réseau ouvert, lecture directe via navigateur) ----
+PW="Playwright, lecture directe de la page"
+E2 = [
+("SHOWER","A3","FACT","Amazon 'shower filter for hard water' (48 résultats p.1): prix médian $26.98 (min $8.79, max $136); 11/48 entre $40 et $90; ventes mensuelles affichées cumulées >= 94 000 sur 43 listings","Amazon.com","https://www.amazon.com/s?k=shower+filter+for+hard+water",D,PW,"Haute","'bought in past month' = paliers planchers Amazon; une seule page"),
+("SHOWER","A3","FACT","AquaBliss SF100: $36.99 ($33.29 en Subscribe & Save), 4.4/5 sur 70 351 avis (8% de 1-2 étoiles), 10K+ achetés/mois, n°1 'Showerhead Filters', n°77 Tools & Home Improvement, en vente depuis 01/2017, expédié par Amazon, avertissement Prop 65","Amazon.com","https://www.amazon.com/dp/B01MUBU0YC",D,PW,"Haute",""),
+("SHOWER","A3","FACT","Récurrence prouvée: cartouche AquaBliss SFC100 $17.99 (10K+/mois) et pack de 3 $42.99 (8K+/mois)","Amazon.com","https://www.amazon.com/s?k=shower+filter+for+hard+water",D,PW,"Haute",""),
+("SHOWER","A3","FACT","La fourchette $40-90 se vend: Weddell Duo $89.98 (certifié NSF, 2K+/mois), MyHalos $74.99 (2K+/mois), AquaHomeGroup $49.95 (1K+/mois), AquaBliss SF500 $45.99 (1K+/mois)","Amazon.com","https://www.amazon.com/s?k=shower+filter+for+hard+water",D,PW,"Haute",""),
+("SHOWER","A5","UNAVAILABLE","Texte des avis négatifs Amazon (connexion requise), Reddit (403 aux robots), Walmart (contrôle anti-robot): non lus, non contournés","","",D,PW,"-",""),
+("SHOWER","A7","FACT","Crystal Quest dropship: gratuit, sans minimum, remises par paliers, fabriqué aux USA, expédition par leurs soins. MAIS: pas de programme pour vendeurs internationaux; vente sous la marque Crystal Quest (pas de marque propre); interdit sur Amazon/eBay/Walmart. Prix publics: filtre dès $40.95, cartouche $29.50","crystalquest.com","https://crystalquest.com/pages/drop-shipping",D,PW,"Haute","Taux de remise non publié"),
+("SHOWER","A7","FACT","AliExpress, expédié depuis les USA: filtres génériques 15/20 étages $11.29-24.49, lots avec 3-4 cartouches $23-36; annonces avec allégations 'softens', 'eczema', 'acne'; aucune mention NSF/ANSI 177","aliexpress.us","https://www.aliexpress.us/w/wholesale-15-stage-shower-filter.html?shipFromCountry=US",D,PW,"Moyenne","Prix promotionnels 11.11; prix à $1.09 = offres d'appel exclues"),
+("SHOWER","A7","UNAVAILABLE","CJ Dropshipping et Alibaba: contrôle anti-robot; Spocket, Syncee: catalogue derrière connexion; Sprite: aucune page revendeur publique","","",D,PW,"-",""),
+("SHOWER","A4","UNAVAILABLE","Meta Ads Library (403), TikTok Creative Center (détail derrière connexion), Google Trends (429): paysage publicitaire et courbe de tendance non obtenus","","",D,PW,"-",""),
+(None,"A1","UNAVAILABLE","Perplexity: l'API répond désormais mais la clé est invalide (401)","","",D,"MCP","Haute","Clé à remplacer dans la configuration")]
+c.executemany("INSERT INTO evidence(product_id,agent,status,observation,source,url,date,method,reliability,limits) VALUES(?,?,?,?,?,?,?,?,?,?)", E2)
+c.execute("UPDATE products SET verdict='DEMANDE VALIDÉE - OFFRE NON VALIDÉE (blocage fournisseur)' WHERE id='SHOWER'")
+c.execute("UPDATE scores SET score=1, rationale='Seul fournisseur US certifié trouvé exclut les vendeurs internationaux et la marque propre; génériques non certifiés' WHERE product_id='SHOWER' AND criterion LIKE 'Faisabilité%'")
+c.execute("UPDATE scores SET score=2, rationale='AquaBliss n°1 à $36.99 avec 70 351 avis; un générique à $59 sans stock n a pas d avantage' WHERE product_id='SHOWER' AND criterion LIKE 'Différenciation%'")
 c.commit()
 os.makedirs(os.path.join(H,"exports"),exist_ok=True)
 for t in ["products","keywords","evidence","competitors","suppliers","scores","tools"]:

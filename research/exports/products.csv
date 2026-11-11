@@ -1,0 +1,9 @@
+id,name,price_band,verdict
+SHOWER,Routine eau dure : filtre de douche + cartouches,$40-90 (héros) + recharge récurrente,CANDIDAT PRINCIPAL - NON VALIDÉ
+PILLOW,Oreiller cervical ergonomique,$40-90,ALTERNATIVE - faible
+REDLIGHT,Luminothérapie rouge à domicile,>$90 typique,"ÉCARTÉ (prix, FDA)"
+POSTURE,Correcteur de posture,<$40,"ÉCARTÉ (prix, commodité)"
+DOGPULL,Harnais anti-traction chien,$36-40,"ÉCARTÉ (volume faible, bas de fourchette)"
+CATSCRATCH,Protection canapé / griffoir chat,<$40,ÉCARTÉ (prix)
+DESK,"Accessoires bureau (repose-pieds, rehausseur)",<$45,"ÉCARTÉ (prix, commodité)"
+HEATPAD,Coussin chauffant nuque/épaules,$30-60,RÉSERVE (non approfondi)

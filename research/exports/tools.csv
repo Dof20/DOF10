@@ -1,0 +1,11 @@
+tool,state,note
+WebSearch,OK,"Seul accès web fonctionnel; résumés, pas de lecture de page"
+AdWhispr (Keyword Planner + Google Shopping),ÉPUISÉ,"7 requêtes complètes, quota 15/15, reset 1er déc."
+Ubersuggest,LIMITÉ,3 rapports/jour; 2 overview + autocomplétion utilisés
+Semrush,BLOQUÉ,0 unité API
+Perplexity,ÉCHEC,fetch failed (hôte non autorisé probable)
+"Ahrefs, Similarweb, Klaviyo, AdsAgent, AdCopilot...",ÉCHEC,403 proxy à la connexion
+HTTP direct / Playwright / web-fetch,BLOQUÉ,"Politique réseau: Amazon, Reddit, Google Trends, TikTok, Meta Ads Library, fournisseurs inaccessibles"
+Shopify,OK partiel,Boutique France/EUR/Basic; Collective indisponible
+"Python 3.13, pandas, sqlite3, openpyxl, Node 22",OK,matplotlib absent
+"Gmail, Drive, Sheets, Calendar, Gamma, Linear, ElevenLabs",OK,Non utilisés (hors périmètre recherche)

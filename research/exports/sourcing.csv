@@ -1,0 +1,5 @@
+product_id,item,cost_low,cost_high,sell_price,source,date,status
+DOGMOB,Poussette pour chien,64.0,99.0,89.0,AliExpress US,2026-11-12,FACT
+DOGMOB,Escalier de lit mousse,20.0,51.0,59.0,AliExpress US,2026-11-12,FACT
+DOGMOB,Siège auto mousse à mémoire,39.0,59.0,79.0,AliExpress US,2026-11-12,FACT
+FUTON,Matelas de sol japonais,25.0,83.0,89.0,AliExpress US,2026-11-12,FACT

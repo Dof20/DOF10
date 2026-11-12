@@ -117,9 +117,48 @@ c.executemany("INSERT INTO evidence(product_id,agent,status,observation,source,u
 c.execute("UPDATE products SET verdict='DEMANDE VALIDÉE - OFFRE NON VALIDÉE (blocage fournisseur)' WHERE id='SHOWER'")
 c.execute("UPDATE scores SET score=1, rationale='Seul fournisseur US certifié trouvé exclut les vendeurs internationaux et la marque propre; génériques non certifiés' WHERE product_id='SHOWER' AND criterion LIKE 'Faisabilité%'")
 c.execute("UPDATE scores SET score=2, rationale='AquaBliss n°1 à $36.99 avec 70 351 avis; un générique à $59 sans stock n a pas d avantage' WHERE product_id='SHOWER' AND criterion LIKE 'Différenciation%'")
+
+# ---- V2.3 : moteur de détection de croissance ----
+import json
+D3="2026-11-12"
+c.executescript("CREATE TABLE growth(category TEXT, topic TEXT, vol_now INTEGER, vol_before INTEGER, growth_pct REAL, period TEXT, source TEXT, date TEXT, status TEXT);"
+                "CREATE TABLE sourcing(product_id TEXT, item TEXT, cost_low REAL, cost_high REAL, sell_price REAL, source TEXT, date TEXT, status TEXT);")
+def _n(x):
+    if not x: return None
+    x=x.replace(',','')
+    return int(float(x[:-1])*1000) if x.endswith('K') else int(float(x[:-1])*1e6) if x.endswith('M') else int(float(x))
+for r in json.load(open(os.path.join(H,"data","exploding_topics_2y_growth.json"))):
+    a,b=_n(r["frm"]),_n(r["to"])
+    c.execute("INSERT INTO growth VALUES(?,?,?,?,?,?,?,?,?)",(r["cat"],r["name"],b or _n(r["vol"]),a,round((b/a-1)*100,1) if a and b else None,r["period"],"Exploding Topics, pages publiques <catégorie>-topics-by-growth",D3,"FACT"))
+c.executemany("INSERT INTO products VALUES(?,?,?,?)",[
+("DOGMOB","Mobilité du chien : poussette, escalier de lit, siège auto","$40-150","CROISSANCE VALIDÉE - MARGE DROPSHIP INSUFFISANTE (NO-GO en l'état)"),
+("FUTON","Matelas de sol japonais","$60-150","CROISSANCE FORTE - non approfondi (volumineux)"),
+("MISC23","Autres sujets en croissance examinés","variable","ÉCARTÉS (prix, réglementation, marques)")])
+c.executemany("INSERT INTO keywords VALUES(?,?,?,?,?,?,?,?,?)",[
+("dog stroller","DOGMOB",40500,"paid difficulty 100, SEO 39",.665,.665,"Ubersuggest MCP (US) - série renvoyée datée 08-11/2025, plate à 40500",D3,"FACT"),
+("dog stairs for bed","DOGMOB",22200,"paid difficulty 100, SEO 31",.93,.93,"Ubersuggest MCP (US) - 07/26 18100, 08-10/26 22200",D3,"FACT"),
+("dog car seat","DOGMOB",40500,"paid difficulty 100, SEO 26",1.35,1.35,"Ubersuggest MCP (US) - plat à 40500 de 07 à 10/26",D3,"FACT")])
+ET="Exploding Topics (lecture directe)"
+E3=[
+("DOGMOB","A1","FACT","Dog Stroller: 21 780 -> 60 500 recherches/mois entre juin 2024 et mai 2026 (+178%)",ET,"https://explodingtopics.com/pets-topics-by-growth",D3,PW,"Moyenne","Périmètre géographique du volume non précisé (probablement mondial); Ubersuggest US = 40 500"),
+("DOGMOB","A1","FACT","Dog Bed Stairs: 22 140 -> 40 500 entre oct. 2024 et sept. 2026 (+83%); Dog Car Bed: +117% sur 5 ans, 14 800/mois",ET,"https://explodingtopics.com/blog/pet-products",D3,PW,"Moyenne","Idem"),
+("DOGMOB","A1","UNAVAILABLE","Google Trends (429 à chaque tentative): aucune courbe indépendante pour recouper la croissance; Ubersuggest ne montre que 4 mois, plats","","",D3,PW,"-","La croissance repose sur une seule source"),
+("DOGMOB","A3","UNAVAILABLE","Amazon, Target (429), Chewy (403), eBay, Etsy (403): refus des accès automatisés, non contournés. Validation multi-plateforme limitée à la recherche web","","",D3,PW,"-",""),
+("DOGMOB","A4","FACT","Études de marché: mobilité animale mondiale ~2,2 Md$ en 2025, croissance 7-9%/an; poussettes 5,6-7,5%/an; moteur cité: chiens âgés et petites races",WS,"https://www.salehoo.com/trends/pet-stroller",D3,WS,"Faible","Cabinets payants, chiffres divergents (un rapport annonce 89%/an, écarté)"),
+("DOGMOB","A8","FACT","Sièges auto pour chien: tests du Center for Pet Safety (2013-2015) où la plupart des dispositifs échouent; aucune norme obligatoire; CPS déconseille les sièges rehausseurs pour chiens de moins de 15 lb",WS,"https://www.centerforpetsafety.org/?p=1152",D3,WS,"Moyenne","Tests anciens; toute allégation de sécurité serait indéfendable"),
+("DOGMOB","A7","FACT","AliExpress expédié des USA (prix public unitaire, port inclus): poussettes $37-143 (la plupart $64-99); escaliers mousse/bois $20-51; sièges auto mousse à mémoire $39-59",'aliexpress.us',"https://www.aliexpress.us/w/wholesale-dog-stroller.html?shipFromCountry=US",D3,PW,"Moyenne","Prix de détail AliExpress, pas un tarif dropship négocié; qualité non vérifiée"),
+("MISC23","A1","FACT","Glimpse (Google Trends): mouth tape +134% a/a, hair texture powder +104%, sleep bonnet +64%, hard water shower filter +20%, sleep earbuds +31%","meetglimpse.com","https://meetglimpse.com/google-trends/products/",D3,PW,"Moyenne","Liste éditoriale non datée"),
+("MISC23","A2","FACT","Pinterest Trends US: catégories shopping en hausse sur un mois: mixeurs +123%, outils de maquillage +109%, chaussons +77%, décorations de fêtes +65%","trends.pinterest.com","https://trends.pinterest.com/",D3,PW,"Haute","Saisonnier (novembre)"),
+("MISC23","A1","FACT","Sur 267 sujets en croissance (12 catégories), la majorité sont des cosmétiques, compléments, aliments, vêtements ou marques: hors périmètre dropship sans stock ou sous 40 $","Exploding Topics","https://explodingtopics.com/blog/trending-products",D3,PW,"Haute","")]
+c.executemany("INSERT INTO evidence(product_id,agent,status,observation,source,url,date,method,reliability,limits) VALUES(?,?,?,?,?,?,?,?,?,?)",E3)
+c.executemany("INSERT INTO sourcing VALUES(?,?,?,?,?,?,?,?)",[
+("DOGMOB","Poussette pour chien",64,99,89,"AliExpress US",D3,"FACT"),
+("DOGMOB","Escalier de lit mousse",20,51,59,"AliExpress US",D3,"FACT"),
+("DOGMOB","Siège auto mousse à mémoire",39,59,79,"AliExpress US",D3,"FACT"),
+("FUTON","Matelas de sol japonais",25,83,89,"AliExpress US",D3,"FACT")])
 c.commit()
 os.makedirs(os.path.join(H,"exports"),exist_ok=True)
-for t in ["products","keywords","evidence","competitors","suppliers","scores","tools"]:
+for t in ["products","keywords","evidence","competitors","suppliers","scores","tools","growth","sourcing"]:
     cur=c.execute(f"SELECT * FROM {t}")
     with open(os.path.join(H,"exports",t+".csv"),"w",newline="") as f:
         w=csv.writer(f); w.writerow([d[0] for d in cur.description]); w.writerows(cur)
@@ -132,3 +171,10 @@ for price in (49,59,69):
         fee=price*.029+.30; m1=price-fee-cogs-38.99
         r=25; rm=r-(r*.029+.30)-8  # recharge $25, COGS+port $8 HYPOTHESIS
         print(f"  prix ${price} coût ${cogs}: 1re commande {m1:+.2f} | +2 recharges {m1+2*rm:+.2f} | seuil CPA ${price-fee-cogs:.2f}")
+
+print("\nV2.3 - marge 1re commande (ESTIMATE): prix - frais Shopify - coût AliExpress; CPA médian $38.99")
+for pid,item,lo,hi,sp in c.execute("SELECT product_id,item,cost_low,cost_high,sell_price FROM sourcing"):
+    fee=sp*.029+.30
+    print(f"  {item:32s} vente ${sp:.0f}: marge avant pub ${sp-fee-hi:.2f} à ${sp-fee-lo:.2f} | après CPA médian ${sp-fee-hi-38.99:+.2f} à ${sp-fee-lo-38.99:+.2f}")
+print("Top croissance, produits physiques non consommables (FACT):")
+for r in c.execute("SELECT topic,vol_before,vol_now,growth_pct FROM growth WHERE topic IN ('Dog Stroller','Dog Bed Stairs','Japanese Floor Mattress','Twin Floor Bed','Mini Rice Cooker','Dual Shower Head','Magnetic Shelf','Heated Eye Mask','Cordless Pressure Washer','Acoustic Wall Panels','Label Printer','Monitor Light','Shoe Bag','Travel Bottle Warmer','Emergency Radio','Arched Mirror','Foam Sprayer','Lifting Hooks') GROUP BY topic ORDER BY growth_pct DESC"): print("  ",r)

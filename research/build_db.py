@@ -156,6 +156,33 @@ c.executemany("INSERT INTO sourcing VALUES(?,?,?,?,?,?,?,?)",[
 ("DOGMOB","Escalier de lit mousse",20,51,59,"AliExpress US",D3,"FACT"),
 ("DOGMOB","Siège auto mousse à mémoire",39,59,79,"AliExpress US",D3,"FACT"),
 ("FUTON","Matelas de sol japonais",25,83,89,"AliExpress US",D3,"FACT")])
+
+# ---- Niche sport / running / protection articulaire (12/11/2026) ----
+c.executemany("INSERT INTO products VALUES(?,?,?,?)",[
+("KNEE","Genouillère de compression (capture fournisseur $2.92-7.02)","$10-25 marché de masse; $55-130 premium","DEMANDE NON MESURÉE - prix de marché sous la fourchette"),
+("HYDVEST","Gilet d'hydratation running","$22-33 entrée de gamme; $100-160 marques","CROISSANCE +188% - À INSTRUIRE"),
+("RECSLIDE","Claquettes de récupération","$40-70","CROISSANCE +254% - dominé par des marques, tailles"),
+("COMPBOOT","Bottes de compression","$100-900","CROISSANCE +236% - hors fourchette de prix")])
+for t,v0,g,d in [("Compression Boots",49500,236,"sept. 2022"),("Hydration Vest",18100,188,"avr. 2024"),("Lifting Hooks",12100,137,"avr. 2023"),("Lifting Straps",135000,84,"avr. 2024"),("Recovery Slides",27100,254,"janv. 2025"),("Running Vest",135000,5,"sept. 2026"),("Toe Spacers",60500,39,"mai 2023")]:
+    c.execute("INSERT INTO growth VALUES(?,?,?,?,?,?,?,?,?)",("sport-fiches",t,v0,None,g,"2 ans, sujet suivi depuis "+d,"Exploding Topics, fiche sujet publique",D3,"FACT"))
+c.executemany("INSERT INTO sourcing VALUES(?,?,?,?,?,?,?,?)",[
+("KNEE","Genouillère (lot de 2)",6,17,29,"Capture fournisseur + AliExpress US",D3,"FACT"),
+("KNEE","Kit genou coureur (2 genouillères + sangle rotulienne)",12,20,49,"AliExpress US - composition HYPOTHESIS",D3,"ESTIMATE"),
+("HYDVEST","Gilet d'hydratation 5 L",12,29,59,"AliExpress US",D3,"FACT"),
+("RECSLIDE","Claquettes EVA",10,15,49,"AliExpress US",D3,"FACT"),
+("COMPBOOT","Bottes de compression",63,131,149,"AliExpress US",D3,"FACT")])
+E4=[
+("KNEE","A7","FACT","Capture d'écran de l'utilisateur: genouillère de compression NAILEKESI, réf. SU00109538, $2.92-7.02, traitement 1-3 jours pour 80% des commandes","Application fournisseur (capture utilisateur)","",D3,"Capture d'écran","Moyenne","Fournisseur, pays d'expédition et frais de port non visibles"),
+("KNEE","A1","UNAVAILABLE","Volume de recherche et CPC US pour knee sleeve / knee brace: quotas Ubersuggest (3/3) et AdWhispr épuisés, Semrush sans unités","","",D3,"MCP","-","À mesurer dès le retour des quotas"),
+("KNEE","A1","FACT","Autocomplétion Google 'knee sleeve for': arthritis, running, meniscus tear, knee pain, squats, patellar tendonitis, runners knee, basketball. 'knee brace for running': pain, reddit, torn meniscus, patella, arthritis","Google Suggest","https://www.google.com/complete/search?client=firefox&q=knee+sleeve+for+",D3,"API publique","Haute","Pas de volumes"),
+("KNEE","A3","FACT","Prix de marché: POWERLIX ~$15-20 (60 000+ avis), Copper Fit $14.61-22 (Dual Action $39.99), lot de 2 sous $10; premium Incrediwear $55-60, Bauerfeind GenuTrain ~$95-130",WS,"https://shopsavvy.com/reviews-tldr/copper-fit-knee-sleeve",D3,WS,"Moyenne","Sites comparatifs affiliés; Amazon non lu"),
+("KNEE","A8","FACT","Genouillère = orthèse de membre, classe I exemptée de 510(k) (21 CFR 890.3475) si vendue comme soutien; les manchons de compression thérapeutiques (oedème, TVP) relèvent de la classe II (870.5800). Les dispositifs de classe I restent soumis aux règles générales (UDI)",WS,"https://fda.innolitics.com/productcode/LLK.md",D3,WS,"Moyenne","Bases tierces; pas un avis juridique. L'enregistrement de l'importateur est à vérifier"),
+("KNEE","A4","FACT","Marché mondial des genouillères: 1,21 à 1,56 Md$ en 2026, +4,6 à 7,5%/an",WS,"https://www.gminsights.com/industry-analysis/knee-braces-market",D3,WS,"Faible","Marché mature, pas un signal de croissance"),
+("HYDVEST","A2","FACT","Running US: participation par course +5,9% au 1er semestre 2026 (RunSignup); clubs de course Strava x3,5 en 2025; croissance portée par les coureurs occasionnels (+7%/an, OIA 2026)",WS,"https://www.runningusa.org/?p=30937",D3,WS,"Moyenne","Résumés de recherche"),
+("HYDVEST","A3","FACT","Gilets d'hydratation: entrée de gamme Amazon $21.99-32.89 (AONIJIE, SEMSTY, Criuage); Salomon Active Skin 4 $100; Nathan VaporAiress $140-160",WS,"https://www.cleverhiker.com/best-running-vests",D3,WS,"Moyenne","Comparatifs affiliés"),
+("HYDVEST","A1","FACT","Autocomplétion 'hydration vest for': running, hiking, half marathon, women, trail running, marathon training, big guys","Google Suggest","",D3,"API publique","Haute","Pas de volumes"),
+("COMPBOOT","A8","HYPOTHESIS","Les bottes de compression avec allégations circulation/oedème relèveraient de la classe II FDA (870.5800); autocomplétion: 'for lymphedema', 'for swelling', 'for circulation'","","",D3,"Raisonnement","Faible","À vérifier")]
+c.executemany("INSERT INTO evidence(product_id,agent,status,observation,source,url,date,method,reliability,limits) VALUES(?,?,?,?,?,?,?,?,?,?)",E4)
 c.commit()
 os.makedirs(os.path.join(H,"exports"),exist_ok=True)
 for t in ["products","keywords","evidence","competitors","suppliers","scores","tools","growth","sourcing"]:
